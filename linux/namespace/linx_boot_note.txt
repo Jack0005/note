@@ -1,0 +1,37 @@
+linux系统启动的引导过程
+
+linux boot分为三个阶段
+1 bios阶段
+2 boot loader阶段
+3 内核启动阶段
+
+bios阶段
+机器通电后 首先启动bios 检查硬件和功能
+这个自检过程由POST(power on self test)来做
+自检成功后，bios检查MBR(mastet boot record)是否指向boot loader
+
+boot loader阶段
+如果要安装一个操作系统，就一定需要boot loader
+常用的boot loader有两种
+LILO : linxu loader 
+GRUB : grand unified boot loader
+
+boot loader 呈现给用户的是像菜单一样的入口，每一个入口对应了一个操作系统
+(boot loader 是系统启动镜像的选择)
+boot loader会情动加载操作系统
+选择启动linux操作系统后，它会将linux内核解压进内存
+之后linux创建initrd (init ramdisk)
+内核将inird当做一个临时的文件系统，驻留在内存中
+它包含了工具和内核模块 这些继续进行boot进程 包括挂在虚拟文件系统的根目录
+一些linux文件系统不使用initrd，但仍会使用initramfs 其功能与initrd相同 是一个initrd的成功执行者
+下一个产物是linuxrc，它是一个执行文件 他会探测到很多的存储硬件并找到合适内核模块去驱动存储硬件
+这就需要真正的文件系统被被内核挂载
+内核阶段
+在linxu 引导加载序列中 linux内核基于linuxrc的结果 可以挂载真正的根文件系统
+真正的文件系统被引用为"/" 并且是linux子文件夹和文件存在的地方
+然后 内核会产生init进程 这个进程的pid描述符是“1” 因为他是第一个后台进程或者守护进程 在boot时由内核启动的
+所有的的其他(daemons)守护进程 都是由init进程产生的
+所以init进程会加载其他的系统daemon进程 根据不同runlevel的配置文案
+例如
+如果系统boot要启动runlevel3 的系统daemon 那么init进程会启动runlevel3的所有daemons
+

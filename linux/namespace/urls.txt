@@ -1,0 +1,14 @@
+#linux boot sequence
+
+https://www.golinuxcloud.com/linux-boot-process-explained-step-detail/
+
+https://www.golinuxhub.com/2014/03/step-by-step-linux-boot-process.html
+
+#linux namespaces
+
+http://man7.org/linux/man-pages/man7/namespaces.7.html
+
+#docker原理
+https://www.cnblogs.com/heyanan/p/7800284.html
+http://dockone.io/article/783
+http://dockone.io/article/2941
