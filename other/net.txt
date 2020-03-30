@@ -1,0 +1,91 @@
+网络相关的知识点
+
+kube-proxy
+ingress
+haproxy
+lvs
+
+flannel
+calico
+
+net namespace
+
+veth
+
+briedge
+
+vxlan
+
+bgp
+
+iptables
+ipvs
+
+nginx 7/4 层负载均衡
+http 的基本使用方法
+
+
+核心对应出来
+金山云网络方案 金山云lb flannel:ksru backend
+自建机房的网络方案 lvs flannel
+aws网络方案 flannel
+ali sgp 网络方案：kube-proxy terway
+自建机房k8s 负载方案 ingress：域名+固定ingress 机器进行访问
+
+数据库
+mysql
+redis 分布式锁的基本概念 falcon的数据传输，从judge-》alarm-》sms gateway
+etcd
+
+服务发现
+zk
+etcd
+这里的zk了解
+etcd 要熟悉基本的原理
+etcd 的基本原理 raft 算法 和paxoso 算法
+
+zk 基本会用，了解业务怎么通过nginx进行监听
+
+etecd 了解数据的持久化方法，监听的基本原理
+
+日志的基本方案
+filebeat + kafka + es
+降低技术栈，节约成本
+lcs-agent + talos + es
+
+
+监控
+falcon
+prometheus
+
+falcon 非常熟悉 一致性hash 分割不均匀 + 差异大概两倍。falcon 断点问题。counter 数据计算时出现两个断点（需要回忆一下）
+Promethus 熟悉 架构，存储， 优缺点，性能
+
+扩缩的基本方案
+基于falcon的扩缩方案
+k8s 原生的扩缩方案
+prometheus + prometheus-adapter + apiserver{api group} + 
+
+流产项目
+quota
+
+k8s
+各个组件的节本原理
+kubelet kubectl kube-controller-manager ingress kube-proxy
+各个controller的基本特性，参数
+daemonset deployment job statefulset
+持久化存储
+service
+rbac
+quota
+api-extention
+
+docker
+dockerd 基本原理
+dockerd containerd container-shim runc 业务进程
+cgroup namespace 看源码
+
+了解kata contaienr的基本架构
+
+linux
+网络、内存、文件系统
