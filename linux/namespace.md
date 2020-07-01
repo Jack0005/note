@@ -35,3 +35,24 @@ calico是个三层网络，通过bgp协议，学习路由信息。
 对比flanne 和calico，flannel host-gateway 是etcd分配ip 段 然后写入本机路由表（公共ip 分发的物理机），并写入核心Tor设备（集群间互通）
 
 calico规划宿主机的容器网段，然后各节点的agent通过BGP协议学习各宿主机的的信息和网段的对应关系
+
+
+
+
+
+cni
+
+https://wiki.opskumu.com/kubernetes/wang-luo-fang-an/src-kubelet-cni
+
+kubelet cni 原理，在kubelet 里怎么进行调用
+
+
+
+https://yucs.github.io/2017/12/06/2017-12-6-CNI/
+
+cni 的原理以及具体的原理实现
+
+
+
+
+
