@@ -22,10 +22,10 @@ modprobe
 * 必备的宏
 
 ```C
-MODULE_LICENSE  //许可证
+MODULE_LICENSE  	//许可证
 MODULE_AUTHOR		//描述模块作者
 MODULE_DESCRIPTION	//模块用途简述
-MODULE_VERSION	//模块版本
+MODULE_VERSION		//模块版本
 MODULE_ALIAS		//模块别名
 MODULE_DEVICE_TABLE	//模块支持的设备
 ```
@@ -101,11 +101,42 @@ module_param_array(name,type,num,perm);
 ### 示例程序
 
 ```c
-// 这里是hello world
+#include<linux/module.h>
+#include<linux/init.h>
+
+static int __init hello_init(void)
+{
+    printk(KERN_ALERT "hello world\n");
+    return 0;
+}
+
+static void __exit hello_exit(void)
+{
+    printk(KERN_ALERT "bye world\n");
+    return;
+}
+
+module_init(hello_init);
+module_exit(hello_exit);
+
+
+MODULE_LICENSE("GPL");
 ```
 
 ### Makefile
 
 ```makefile
 # 这里是Makefile
+TARGET := hello
+ifneq ($(KERNELRELEASE),)
+	obj-m := $(TARGET).o
+#	$(TARGET)-objs = hello.o  init.o
+else
+	KERNELDIR ?= /lib/modules/$(shell uname -r)/build
+	PWD := $(shell pwd)
+default:
+		$(MAKE) -C $(KERNELDIR) M=$(PWD) modules
+clean:
+		rm -rf *.o *.mod.c *.ko *.symvers *.order *.makers *.cmd *.mod
+endif
 ```
