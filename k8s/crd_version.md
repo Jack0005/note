@@ -1,8 +1,8 @@
 # Versions in CustomResourceDefinitions
 
-# 调大kubelet日志级别
+# 文档地址
 
-curl -k  -X PUT   -H  'Authorization: Bearer kubeletpassword'  https://localhost:10250/debug/flags/v -d "1"
+https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definition-versioning/#permissible-mutations
 
 # 解决的问题
 
@@ -438,6 +438,22 @@ Webhooks 响应
 
 ### Previous storage versions
 
-
+api server在storedVersions中记录了每个曾经被标记为存储版本的版本号码。创建的资源对象可能被持久化为任何被指定为存储版本的版本。没有资源对象可以被存储为未被指定为存储版本的资源版本。
 
 ## Upgrade existing objects to a new stored version
+
+升级和更新存储版本的操作：
+
+*Option 1*：使用迁移工具[storage Version migrator](https://github.com/kubernetes-sigs/kube-storage-version-migrator)
+
+* 运行[storage Version migrator](https://github.com/kubernetes-sigs/kube-storage-version-migrator)
+* 在CustomResourceDefinition的`status.storedVersions`中移除旧版本
+
+*Option 2*：手动升级
+
+示例从v1beta1升级到v1
+
+* 使用kubectl设置v1作为CustomResourceDefinition的存储版本，当前storedVersions是v1beta1, v1。
+* 读取所有的已存在资源，然后写回，用于强制将存储版本改为v1
+* 从CustomResourceDefinition中status.storedVersions字段中删除v1beta1
+
